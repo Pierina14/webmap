@@ -1,0 +1,1448 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 871px;
+            height: 712px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/agrupamiento_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-15.1324082252615,-74.41307814077528],[-12.728915993211501,-71.47133905675916]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var layer_CartoDbDarkMatter_0 = L.tileLayer('http://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_CartoDbDarkMatter_0;
+        map.addLayer(layer_CartoDbDarkMatter_0);
+        function pop_agrupamiento_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? Autolinker.link(feature.properties['OBJECTID'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['UBIGEO'] !== null ? Autolinker.link(feature.properties['UBIGEO'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['IDPROV'] !== null ? Autolinker.link(feature.properties['IDPROV'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Departamento'] !== null ? Autolinker.link(feature.properties['Departamento'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Provincia'] !== null ? Autolinker.link(feature.properties['Provincia'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Distrito</th>\
+                        <td>' + (feature.properties['Distrito'] !== null ? Autolinker.link(feature.properties['Distrito'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['urbana'] !== null ? Autolinker.link(feature.properties['urbana'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['rural'] !== null ? Autolinker.link(feature.properties['rural'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['porc_urbana18'] !== null ? Autolinker.link(feature.properties['porc_urbana18'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['porc_rural18'] !== null ? Autolinker.link(feature.properties['porc_rural18'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['hog18'] !== null ? Autolinker.link(feature.properties['hog18'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID_1'] !== null ? Autolinker.link(feature.properties['OBJECTID_1'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['UBIGEO_1'] !== null ? Autolinker.link(feature.properties['UBIGEO_1'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CV'] !== null ? Autolinker.link(feature.properties['CV'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['POBREZA'] !== null ? Autolinker.link(feature.properties['POBREZA'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['GRUPO_NEW'] !== null ? Autolinker.link(feature.properties['GRUPO_NEW'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DIFPOR'] !== null ? Autolinker.link(feature.properties['DIFPOR'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Length'] !== null ? Autolinker.link(feature.properties['Shape_Length'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? Autolinker.link(feature.properties['Shape_Area'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ANA_1_C'] !== null ? Autolinker.link(feature.properties['ANA_1_C'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ANA_1_P'] !== null ? Autolinker.link(feature.properties['ANA_1_P'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ANA_2_C'] !== null ? Autolinker.link(feature.properties['ANA_2_C'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ANA_2_P'] !== null ? Autolinker.link(feature.properties['ANA_2_P'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ANA_3_C'] !== null ? Autolinker.link(feature.properties['ANA_3_C'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ANA_3_P'] !== null ? Autolinker.link(feature.properties['ANA_3_P'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ANA_4_C'] !== null ? Autolinker.link(feature.properties['ANA_4_C'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ANA_4_P'] !== null ? Autolinker.link(feature.properties['ANA_4_P'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ANA_5_C'] !== null ? Autolinker.link(feature.properties['ANA_5_C'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ANA_5_P'] !== null ? Autolinker.link(feature.properties['ANA_5_P'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DIST_CRIT'] !== null ? Autolinker.link(feature.properties['DIST_CRIT'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SOLUCION'] !== null ? Autolinker.link(feature.properties['SOLUCION'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_agrupamiento_1_0(feature) {
+            switch(String(feature.properties['Distrito'])) {
+                case 'ABANCAY':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'ANCO-HUALLO':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(217,32,31,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'ANDAHUAYLAS':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,39,34,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'ANDARAPA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(221,46,38,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'ANTABAMBA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(223,53,41,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CAPAYA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,60,44,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CARAYBAMBA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(226,67,47,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CHACOCHE':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,74,51,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CHALHUANCA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,82,54,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CHALLHUAHUACHO':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,89,57,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CHAPIMARCA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,96,61,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CHIARA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,103,64,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CHINCHEROS':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,110,67,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CHUQUIBAMBILLA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(239,117,70,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CIRCA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(241,124,74,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'COCHARCAS':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,131,77,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'COLCABAMBA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(244,139,80,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'COTABAMBAS':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(246,146,84,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'COTARUSE':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(248,153,87,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'COYLLURQUI':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(250,160,90,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CURAHUASI':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,167,94,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CURASCO':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,174,97,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CURPAHUASI':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,178,101,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'EL ORO':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,182,106,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'EL PORVENIR':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,186,110,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'GAMARRA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,190,115,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'HAQUIRA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,194,119,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'HUACCANA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,197,124,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'HUANCARAMA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,201,128,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'HUANCARAY':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,205,133,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'HUANIPACA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,209,137,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'HUAQUIRCA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,213,142,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'HUAYANA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,217,146,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'HUAYLLATI':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,221,151,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'HUAYLLO':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,225,155,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'JOSE MARIA ARGUEDAS':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,228,160,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'JUAN ESPINOZA MEDRANO':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,232,164,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'JUSTO APU SAHUARAURA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,236,169,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'KAQUIABAMBA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,240,173,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'KISHUARA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,244,178,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'LAMBRAMA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,248,182,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'LOS CHANKAS':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,252,187,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'LUCRE':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,191,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'MAMARA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(251,254,190,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'MARA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,252,189,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'MICAELA BASTIDAS':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,251,187,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'OCOBAMBA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(239,249,186,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'ONGOY':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,247,185,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'OROPESA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,246,184,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'PACHACONAS':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,244,182,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'PACOBAMBA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(223,242,181,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'PACUCHA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,241,180,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'PAMPACHIRI':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,239,178,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'PATAYPAMPA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(211,238,177,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'PICHIRHUA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(207,236,176,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'POCOHUANCA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(203,234,174,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'POMACOCHA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(199,233,173,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'PROGRESO':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(195,231,172,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'RANRACANCHA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(191,229,171,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'ROCCHACC':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(187,228,169,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SABAINO':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(183,226,168,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SAN ANTONIO':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(179,225,167,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SAN ANTONIO DE CACHI':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(175,223,165,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SAN JERONIMO':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(171,221,164,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SAN JUAN DE CHACÑA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(165,217,165,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SAN MIGUEL DE CHACCRAMPA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(159,213,166,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SAN PEDRO DE CACHORA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,208,167,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SANTA MARIA DE CHICMO':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(147,204,168,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SANTA ROSA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(141,200,169,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SAÑAYCA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(134,196,170,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SORAYA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(128,191,172,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'TALAVERA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(122,187,173,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'TAMBOBAMBA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,183,174,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'TAMBURCO':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(110,178,175,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'TAPAIRIHUA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(104,174,176,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'TINTAY':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(98,170,177,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'TORAYA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(92,165,178,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'TUMAY HUARACA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(86,161,179,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'TURPAY':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,157,180,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'TURPO':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(73,153,181,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'URANMARCA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(67,148,182,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'VILCABAMBA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(61,144,183,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'VIRUNDO':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(55,140,184,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'YANACA':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(49,135,185,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'NULL':
+                    return {
+                pane: 'pane_agrupamiento_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,131,186,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_agrupamiento_1');
+        map.getPane('pane_agrupamiento_1').style.zIndex = 401;
+        map.getPane('pane_agrupamiento_1').style['mix-blend-mode'] = 'normal';
+        var layer_agrupamiento_1 = new L.geoJson(json_agrupamiento_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_agrupamiento_1',
+            layerName: 'layer_agrupamiento_1',
+            pane: 'pane_agrupamiento_1',
+            onEachFeature: pop_agrupamiento_1,
+            style: style_agrupamiento_1_0,
+        });
+        bounds_group.addLayer(layer_agrupamiento_1);
+        map.addLayer(layer_agrupamiento_1);
+        setBounds();
+        </script>
+    </body>
+</html>
